@@ -1,0 +1,6 @@
+id=conscrypt-patched
+name=Patched conscrypt.jar
+version=v1
+versionCode=1
+author=rafinetiz
+description=Patched conscrypt.jar for bypassing SSL Pinning
