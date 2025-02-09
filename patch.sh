@@ -66,20 +66,20 @@ setup_apktool $APKTOOL_VERSION
 jarfile=$1
 
 echo -e "\e[33mdecompiling jar file...\e[0m"
-ensure_zero apktool d -f -r -o $jarfile.tmp $jarfile
+ensure_zero apktool d -f -r -o build/$jarfile.tmp $jarfile
 
 echo -e "\e[33mpatching classes...\e[0m"
-ensure_zero patch $jarfile.tmp/smali/com/android/org/conscrypt/TrustManagerImpl.smali patches/TrustManagerImpl.patch
+ensure_zero patch build/$jarfile.tmp/smali/com/android/org/conscrypt/TrustManagerImpl.smali patches/TrustManagerImpl.patch
 
 echo -e "\e[33mrecompiling jar file...\e[0m"
-ensure_zero apktool b --api-level 35 -c -o build/$jarfile $jarfile.tmp
-rm -r $jarfile.tmp
+ensure_zero apktool b -c -o build/$jarfile build/$jarfile.tmp
+#rm -r $jarfile.tmp
 
 echo -e "\e[33mzipaligning jar file...\e[0m"
 ensure_zero zipalign 4 build/$jarfile build/$jarfile.aligned.jar
 ensure_zero zipalign -cv 4 build/$jarfile.aligned.jar
-
 rm -r build/$jarfile
+
 ensure_zero mv build/$jarfile.aligned.jar magisk-module/system/framework/$jarfile
 
 echo -e "\e[33mbuilding magisk module...\e[0m"
