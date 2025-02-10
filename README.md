@@ -9,7 +9,7 @@ Bypass SSL Unpinning by patching android conscrypt.jar
 # Building
 
 1. clone this repository
-2. pull your conscrypt.jar from your device to this directory (located at /apex/com.android.conscrypt/javalib)
+2. pull your conscrypt.jar from your device to this cloned directory (conscrpyt.jar usually located at /apex/com.android.conscrypt/javalib)
 3. run `./patch.sh conscrypt.jar` to patch the jar binary and build the magisk module
 4. push the module (`dist/module.zip`) to your device and flash it through magisk or TWRP
 
